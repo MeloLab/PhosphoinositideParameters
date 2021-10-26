@@ -7,13 +7,13 @@ accurately describing the behavior seen in atomistic simulations, improving
 numerical stability and tackling an unintended propensity for aggregation.
 
 You can also find the initial and final conformations for the CG MD simulations
-performed in this article under `Simulation_structures\` . 
+performed in this article under `Simulation_structures/` . 
 
 The parameterization procedure is detailed in the manuscript:
   * L. Borges-Araújo, M.M. Domingues, A. Fedorov, N.C. Santos, M.N. Melo 
   and F. Fernandes, _Acyl-chain saturation regulates the order of 
   phosphatidylinositol 4,5-bisphosphate nanodomains_ 
-which should be available soon.
+(available soon!).
 
 When using these parameters, please cite this reference as well as the initial
 parameterization by López et al. 2013:
