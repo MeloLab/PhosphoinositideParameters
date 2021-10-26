@@ -1,0 +1,319 @@
+;Improved Martini 2.2 PI(4,5)P2 topologies
+;
+; Description:
+;   A general model of phosphatidylinositol 4-5-bisphosphate (PI(4,5)P2) lipid corresponding to atomistic C16:0 dipalmitoyl (PI45A); 
+;   di18:1 dioleoyl (PI45B) and 18:0 20:4 1-stearoyl-2-arachidonyl (PI45C) tails.
+;
+; Parameterization:
+;   The lipid head is based on atomistic phosphatidylinositol (PI) simulations, see Lopez et al. 2013 for details. 
+;   The lipid tails follow the standard Martini 2.0 lipid definitions and building block rules.
+;   The lipid headgroup parameters were improved by L. Borges-Araujo and M.N. Melo to improve stability and conformationa
+;   dynamics.
+;
+; Reference(s): 
+;   C.A. Lopez, Z. Sovova, F.J. van Eerden, A.H. de Vries, S.J. Marrink. Martini force field parameters for glycolipids. JCTC, 
+;   9:1694-1708, 2013. doi:10.1021/ct3009655 
+;   H.I. Ingolfsson, M.N. Melo, F.J. van Eerden, C. Arnarez, C.A. Lopez, T.A. Wassenaar, X. Periole, A.H. De Vries, D.P. Tieleman, 
+;   S.J. Marrink. Lipid organization of the plasma membrane. JACS, 136:14554-14559, 2014. doi:10.1021/ja507832e 
+;   S.J. Marrink, A.H. de Vries, A.E. Mark. Coarse grained model for semi-quantitative lipid simulations. JPC-B, 108:750-760, 
+;   2004. doi:10.1021/jp036508g 
+;   S.J. Marrink, H.J. Risselada, S. Yefimov, D.P. Tieleman, A.H. de Vries. The MARTINI force field: coarse grained model for 
+;   biomolecular simulations. JPC-B, 111:7812-7824, 2007. doi:10.1021/jp071097f
+;
+
+[ moleculetype ]
+; molname      nrexcl
+  PI45A          1
+
+[ atoms ]
+; id 	type 	resnr 	residu 	atom 	cgnr 	charge
+   1 	P1  	 1 	PI45A 	C1  	 1 	0 	
+   2 	Na 	     1 	PI45A 	C2  	 2 	0 	
+   3 	P4  	 1 	PI45A 	C3  	 3 	0 	
+   4 	Qa 	     1 	PI45A   PO4 	 4     -1.0 	
+   5    Qa       1  PI45A   P4       5     -2.0
+   6    Qa       1  PI45A   P5       6     -1.0
+; Tail part (uses standard Martini v2.0 tail rules)
+   7 	Na 	     1 	PI45A 	GL1 	 7 	0 	
+   8 	Na   	 1 	PI45A 	GL2 	 8 	0 	
+   9 	C1 	     1 	PI45A 	C1A 	 9 	0 	
+  10 	C1 	     1 	PI45A 	C2A 	10 	0 	
+  11 	C1 	     1 	PI45A 	C3A 	11 	0 	
+  12 	C1    	 1 	PI45A 	C4A 	12 	0 	
+  13 	C1 	     1 	PI45A 	C1B 	13 	0 	
+  14 	C1 	     1 	PI45A 	C2B 	14 	0 	
+  15 	C1 	     1 	PI45A 	C3B 	15 	0 	
+  16 	C1 	     1 	PI45A 	C4B 	16 	0 	
+  
+
+[ bonds ]
+;  i  j 	funct 	length 	force.c.
+#ifdef FLEXIBLE
+; Using bonds not constraints
+   1  2 	1 	0.40 	30000 	
+   1  3 	1 	0.40 	30000 	
+   2  3 	1 	0.40 	30000
+#endif
+   5  3     1   0.24    17500
+   5  2     1   0.47    17500 	
+   6  3     1   0.51    5000
+   6  2     1   0.27    12000 	
+   1  4     1   0.33 	17500    
+   4  7     1 	0.47 	1250 	
+; Tail part (uses standard Martini v2.0 tail rules)
+   7  8 	1 	0.37 	1250 	
+   7  9 	1 	0.47 	1250 	
+   9 10 	1 	0.47 	1250 	
+  10 11 	1 	0.47 	1250 	
+  11 12 	1 	0.47 	1250 	
+   8 13 	1 	0.47 	1250 	
+  13 14 	1 	0.47 	1250 	
+  14 15 	1 	0.47 	1250 	
+  15 16 	1 	0.47 	1250 	
+
+[ angles ]
+;  i  j  k 	funct 	angle 	force.c.
+   3  1  4   	10 	   133.0   200.0   
+   2  1  4 	     2  	95.0 	50.0 
+; Orient Head
+   1  4  7   	10     120.0 	40.0
+   8  7  3      10      60.0     1.0
+   4  7  8      10      60.0    15.0
+   2  3  7      10      60.0    10.0
+; Tail part (uses standard Martini v2.0 tail rules)
+   7  9 10 	     2 	   180.0 	25.0 	
+   9 10 11 	     2 	   180.0 	25.0 	
+  10 11 12 	     2 	   180.0 	25.0 	
+   8 13 14 	     2 	   180.0 	25.0 	
+  13 14 15 	     2 	   180.0 	25.0 	
+  14 15 16 	     2 	   180.0 	25.0 	
+
+[ dihedrals ]
+;  i  j  k  l 	funct 	angle 	force.c.
+ 2  3  7  8  1 -170.0    0.2  1
+ 2  3  1  4  2  110.0   25.0 
+ 1  4  7  8  1  -25.0    7.0  1
+; Orient P4
+ 5  3  2  1  2  -150.0   100.0 
+; Orient P5
+ 6  2  3  1  2   180.0   120.0
+
+#ifndef FLEXIBLE
+[ constraints ]
+;  i  j  k 	funct 	length
+; Using constraints not bonds
+   1  2 	1 	0.40           
+   1  3 	1 	0.40     	
+   2  3 	1 	0.40      	
+#endif
+
+[ exclusions ]
+;  i  j
+  5  6
+  
+#ifdef FLATBOTTOM
+[ position_restraints ]
+;Atom func  g  r  k
+7 2 5 2.0 200.0
+8 2 5 2.0 200.0
+#endif
+
+
+
+[ moleculetype ]
+; molname      nrexcl
+  PI45B          1
+
+[ atoms ]
+; id 	type 	resnr 	residu 	atom 	cgnr 	charge
+   1 	P1 	 1 	PI45B    C1  	 1 	0 	
+   2 	Na 	 1 	PI45B 	 C2  	 2 	0 	
+   3 	P4 	 1 	PI45B 	 C3  	 3 	0 	
+   4 	Qa 	 1 	PI45B 	PO4 	 4     -1.0 	
+   5    Qa   1  PI45B    P4      5     -2.0
+   6    Qa   1  PI45B    P5      6     -1.0
+; Tail part (uses standard Martini v2.0 tail rules)
+   7 	Na 	 1 	PI45B 	GL1 	 7 	0 	
+   8 	Na 	 1 	PI45B 	GL2 	 8 	0 	
+   9 	C1 	 1 	PI45B 	C1A 	 9 	0 	
+  10 	C3 	 1 	PI45B 	D2A 	10 	0 	
+  11 	C1 	 1 	PI45B 	C3A 	11 	0 	
+  12 	C1 	 1 	PI45B 	C4A 	12 	0 	
+  13 	C1 	 1 	PI45B 	C1B 	13 	0 	
+  14 	C3 	 1 	PI45B 	D2B 	14 	0 	
+  15 	C1 	 1 	PI45B 	C3B 	15 	0 	
+  16 	C1 	 1 	PI45B 	C4B 	16 	0 	
+  
+
+[ bonds ]
+;  i  j 	funct 	length 	force.c.
+#ifdef FLEXIBLE
+; Using bonds not constraints
+   1  2 	1 	0.40 	30000 	
+   1  3 	1 	0.40 	30000 	
+   2  3 	1 	0.40 	30000
+#endif
+   5  3     1   0.24    17500
+   5  2     1   0.47    17500 	
+   6  3     1   0.51    5000
+   6  2     1   0.27    12000 	
+   1  4 	1   0.33 	17500    
+   4  7 	1   0.47 	1250 	
+; Tail part (uses standard Martini v2.0 tail rules)
+   7  8 	1 	0.37 	1250 	
+   7  9 	1 	0.47 	1250 	
+   9 10 	1 	0.47 	1250 	
+  10 11 	1 	0.47 	1250 	
+  11 12 	1 	0.47 	1250 	
+   8 13 	1 	0.47 	1250 	
+  13 14 	1 	0.47 	1250 	
+  14 15 	1 	0.47 	1250 	
+  15 16 	1 	0.47 	1250 	
+
+[ angles ]
+;  i  j  k 	funct 	angle 	force.c.
+   3  1  4 	10 	133.0  200.0   
+   2  1  4 	2 	 95.0 	50.0 
+; Orient Head
+   1  4  7  10  120.0 	40.0
+   8  7  3  10   60.0    1.0
+   4  7  8  10   60.0   15.0
+   2  3  7  10   60.0   10.0
+; Tail part (uses standard Martini v2.0 tail rules)
+   7  9 10 	2 	180.0 	25.0 	
+   9 10 11 	2 	120.0 	45.0 	
+  10 11 12 	2 	180.0 	25.0 	
+   8 13 14 	2 	180.0 	25.0 	
+  13 14 15 	2 	120.0 	45.0 	
+  14 15 16 	2 	180.0 	25.0 	
+
+[ dihedrals ]
+;  i  j  k  l 	funct 	angle 	force.c.
+ 2  3  7  8  1 -170.0    0.2  1
+ 2  3  1  4  2  110.0   25.0 
+ 1  4  7  8  1  -25.0    7.0  1
+; Orient P4
+ 5  3  2  1  2  -150.0   100.0 
+; Orient P5
+ 6  2  3  1  2   180.0   120.0
+
+#ifndef FLEXIBLE
+[ constraints ]
+;  i  j  k 	funct 	length
+; Using constraints not bonds
+   1  2 	1 	0.40           
+   1  3 	1 	0.40     	
+   2  3 	1 	0.40      	
+#endif
+
+[ exclusions ]
+;  i  j
+  5  6
+
+#ifdef FLATBOTTOM
+[ position_restraints ]
+;Atom func  g  r  k
+7 2 5 2.0 200.0
+8 2 5 2.0 200.0
+#endif
+
+
+[ moleculetype ]
+; molname      nrexcl
+  PI45C          1
+
+[ atoms ]
+; id 	type 	resnr 	residu 	atom 	cgnr 	charge
+   1 	P1    	 1   	PI45C 	 C1  	 1       0 	
+   2 	Na 	     1 	    PI45C 	 C2  	 2 	     0 	
+   3 	P4 	     1 	    PI45C 	 C3  	 3   	 0 	
+   4 	Qa 	     1 	    PI45C 	 PO4 	 4     -1.0 	
+   5    Qa       1      PI45C    P4      5     -2.0
+   6    Qa       1      PI45C    P5      6     -1.0
+; Tail part (uses standard Martini v2.0 tail rules)
+   7 	Na 	     1 	    PI45C    GL1 	 7 	     0 	
+   8 	Na 	     1   	PI45C    GL2 	 8 	     0 	
+   9    C1       1      PI45C    D1A     9       0
+  10    C1       1      PI45C    D2A     10      0
+  11    C1       1      PI45C    D3A     11      0
+  12    C1       1      PI45C    D4A     12      0
+  13    C1       1      PI45C    C5A     13      0
+  14    C1       1      PI45C    C1B     14      0
+  15    C1       1      PI45C    C2B     15      0
+  16    C1       1      PI45C    C3B     16      0
+  17    C1       1      PI45C    C4B     17      0
+
+[ bonds ]
+;  i  j 	funct 	length 	force.c.
+#ifdef FLEXIBLE
+; Using bonds not constraints
+   1  2     	1 	    0.40 	30000 	
+   1  3 	    1 	    0.40 	30000 	
+   2  3     	1   	0.40 	30000
+#endif
+   5  3         1       0.24    17500
+   5  2         1       0.47    17500 	
+   6  3         1       0.51    5000
+   6  2         1       0.27    12000 	
+   1  4      	1    	0.33 	17500    
+   4  7 	    1    	0.47 	1250 	
+; Tail part (uses standard Martini v2.0 tail rules)
+   7  8         1       0.37    1250
+   7  9         1       0.47    1250
+   9 10         1       0.47    1250
+  10 11         1       0.47    1250
+  11 12         1       0.47    1250
+  12 13         1       0.47    1250
+   8 14         1       0.47    1250
+  14 15         1       0.47    1250
+  15 16         1       0.47    1250
+  16 17         1       0.47    1250
+  15 16 	    1 	    0.47 	1250 	
+
+[ angles ]
+;  i  j  k 	funct 	angle 	force.c.
+   3  1  4 	    10 	   133.0   200.0   
+   2  1  4 	     2 	    95.0 	50.0 
+; Orient Head
+   1  4  7 	    10     120.0    40.0
+   8  7  3      10      60.0     1.0
+   4  7  8      10      60.0    15.0
+   2  3  7      10      60.0    10.0
+; Tail part (uses standard Martini v2.0 tail rules)
+   7  9 10      2       100.0   10.0
+   9 10 11      2       100.0   10.0
+  10 11 12      2       100.0   10.0
+  11 12 13      2       120.0   45.0
+   8 14 15      2       180.0   25.0
+  14 15 16      2       180.0   25.0
+  15 16 17      2       180.0   25.0
+
+[ dihedrals ]
+;  i  j  k  l 	funct 	angle 	force.c.
+ 2  3  7  8  1 -170.0    0.2  1
+ 2  3  1  4  2  110.0   25.0 
+ 1  4  7  8  1  -25.0    7.0  1
+; Orient P4
+ 5  3  2  1  2  -150.0   100.0 
+; Orient P5
+ 6  2  3  1  2   180.0   120.0
+
+#ifndef FLEXIBLE
+[ constraints ]
+;  i  j  k 	funct 	length
+; Using constraints not bonds
+   1  2 	1 	0.40           
+   1  3 	1 	0.40     	
+   2  3 	1 	0.40      	
+#endif
+
+[ exclusions ]
+;  i  j
+  5  6
+
+#ifdef FLATBOTTOM
+[ position_restraints ]
+;Atom func  g  r  k
+7 2 5 2.0 200.0
+8 2 5 2.0 200.0
+#endif
