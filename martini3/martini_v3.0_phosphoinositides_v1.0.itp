@@ -17,13 +17,12 @@
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
-; When using these parameters please read and cite the ChemRxiv preprint
-; manuscript (or preferentially, the final published article if available in the
-; meantime):
+; When using these parameters please read and cite the parameterization article:
 ; 
-; L. Borges-Araujo, P.C.T. Souza, F. Fernandes and M.N. Melo, Improved
-; parameterization of phosphatidylinositide lipid head-groups for the Martini 3
-; coarse grain force field doi:10.26434/chemrxiv.14759991
+; L. Borges-Araujo, P.C.T. Souza, F. Fernandes and M.N. Melo,
+;  Improved Parameterization of Phosphatidylinositide Lipid Headgroups for the
+;  Martini 3 Coarse-Grain Force Field, J. Chem. Theory Comput., 2021,
+;  doi:10.1021/acs.jctc.1c00615
 ;
 ; Also be sure to check https://github.com/MeloLab/PhosphoinositideParameters
 ; for updates to these parameters.
