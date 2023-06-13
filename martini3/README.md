@@ -17,7 +17,9 @@ control under git.
 Finally, be sure to check back for any parameter updates!
 
 The following `insane.py` entry can be used to prepare lipid membranes
-with these phosphoinositide parameters.
+with these phosphoinositide parameters. Alternatively, a barebones `insane.py` 
+script containing this entry can also be found here.
+
 ```
 moltype = "INOSITOLLIPIDS"
 lipidsx[moltype] = (   .5,  .5,   0,  .25,   0,   0, .5,  1,  0,   .5,   0,   0,   0,   0,   0,   0,   1,   1,   1,   1,   1,   1)
